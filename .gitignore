@@ -6,8 +6,12 @@
 /Assets/AssetStoreTools*
 
 # Ignore Paid Content
-/Assets/Resources/Models/JTS_TheSamuraiSword/
+/Assets/Resources/Models/JTS_TheSamuraiSword
 /Assets/Resources/ANimations/Samurai_Katana
+/Assets/PostProcessing
+
+# Ignore Standard Assets
+/Assets/Standard Assets
 
 # Visual Studio 2015 cache directory
 /.vs/
