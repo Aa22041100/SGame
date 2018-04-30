@@ -4,6 +4,8 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
+
+# Ignore Paid Content
 /Assets/Resources/Models/JTS_TheSamuraiSword/
 /Assets/Resources/ANimations/Samurai_Katana
 
