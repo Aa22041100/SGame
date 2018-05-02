@@ -59,6 +59,13 @@ public class PlayerController : MonoBehaviour {
 			playerAnimator.SetTrigger ("TriggerLightAttack");
 		}
 
+		// blocking
+		if (Input.GetMouseButton (1) && isFighting) {
+			playerAnimator.SetBool ("IsBlocking", true);
+		} else {
+			playerAnimator.SetBool ("IsBlocking", false);
+		}
+
 	}
 
 	#region OnClick Event
