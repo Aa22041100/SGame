@@ -36,19 +36,20 @@ public class PlayerController : MonoBehaviour {
 
 		// walk animation
 		vert = Input.GetAxis ("Vertical");
+
+		// sprint checking
+		if (Input.GetKey (KeyCode.LeftShift)) {
+			playerAnimator.SetBool ("IsSprinting", true);
+		} else {
+			playerAnimator.SetBool ("IsSprinting", false);
+		}
+
 		if (vert != 0) {
 			playerAnimator.SetBool ("IsWalking", true);
 		} else {
 			playerAnimator.SetBool ("IsWalking", false);
 		}
 		playerAnimator.SetFloat ("Speed", vert);
-
-		// sprint
-		if (Input.GetKey (KeyCode.LeftShift)) {
-			playerAnimator.SetBool ("IsSprinting", true);
-		} else {
-			playerAnimator.SetBool ("IsSprinting", false);
-		}
 
 		// character rotation
 		horiRotate = Input.GetAxis ("Horizontal");
