@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour {
 		attackStrength = attackMode;
 	}
 	public void SwitchAttackMode () {
-		print ("player - switch attack mode");
 		int tmp = (int) attackStrength;
 		tmp++;
 		if (tmp >= 3) {
