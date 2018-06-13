@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour {
 	public GameObject idlingBlade;
 	public GameObject fightingBlade;
 
+	[Header ("Info")]
+	public AttackMode attackStrength = AttackMode.LightAttack;
+
 	AnimatorStateInfo animInfo;
 
 
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 		// sprint checking
 		if (Input.GetKey (KeyCode.LeftShift)) {
 			playerAnimator.SetBool ("IsSprinting", true);
+			playerAnimator.ResetTrigger ("TriggerAttack");
 		} else {
 			playerAnimator.SetBool ("IsSprinting", false);
 		}
@@ -57,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 
 		// attack
 		if (Input.GetMouseButtonDown (0) && isFighting) {
-			playerAnimator.SetTrigger ("TriggerLightAttack");
+			playerAnimator.SetTrigger ("TriggerAttack");
 		}
 
 		// blocking
@@ -65,6 +69,14 @@ public class PlayerController : MonoBehaviour {
 			playerAnimator.SetBool ("IsBlocking", true);
 		} else {
 			playerAnimator.SetBool ("IsBlocking", false);
+		}
+
+		// attack mode
+		playerAnimator.SetInteger ("AttackMode", (int) attackStrength);
+
+		// change attack mode
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			SwitchAttackMode ();
 		}
 
 	}
@@ -84,14 +96,31 @@ public class PlayerController : MonoBehaviour {
 
 
 	#region Animation Callbacks
-	void OnNoudouFinished () {
+	public void OnNoudouFinished () {
 		idlingBlade.SetActive (!isFighting);
 		fightingBlade.SetActive (isFighting);
 	}
 
-	void OnBaddouFinished () {
+	public void OnBaddouFinished () {
 		idlingBlade.SetActive (!isFighting);
 		fightingBlade.SetActive (isFighting);
+	}
+	#endregion
+
+	#region Setter
+	public void SwitchAttackMode (AttackMode attackMode) {
+		attackStrength = attackMode;
+	}
+	public void SwitchAttackMode () {
+		print ("player - switch attack mode");
+		int tmp = (int) attackStrength;
+		tmp++;
+		if (tmp >= 2) {
+			tmp = 0;
+		}
+		attackStrength = (AttackMode) tmp;
+
+		GameManager.Instance.UpdatePlayerAttackMode (attackStrength);
 	}
 	#endregion
 }
