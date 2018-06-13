@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (vert != 0) {
 			playerAnimator.SetBool ("IsWalking", true);
+			playerAnimator.ResetTrigger ("TriggerFightMode");
+			playerAnimator.ResetTrigger ("TriggerStandMode");
 		} else {
 			playerAnimator.SetBool ("IsWalking", false);
 		}
@@ -115,7 +117,7 @@ public class PlayerController : MonoBehaviour {
 		print ("player - switch attack mode");
 		int tmp = (int) attackStrength;
 		tmp++;
-		if (tmp >= 2) {
+		if (tmp >= 3) {
 			tmp = 0;
 		}
 		attackStrength = (AttackMode) tmp;
