@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 
 	[Header ("Info")]
 	public AttackMode attackStrength = AttackMode.LightAttack;
+	public float rotateSpeed = 1f;
+	public float walkSpeed = 1f;
 
 	AnimatorStateInfo animInfo;
 
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 
 		// character rotation
 		horiRotate = Input.GetAxis ("Horizontal");
-		transform.RotateAround (Vector3.up, horiRotate * Time.deltaTime);
+		transform.RotateAround (Vector3.up, horiRotate * rotateSpeed * Time.deltaTime);
 
 		// attack
 		if (Input.GetMouseButtonDown (0) && isFighting) {
