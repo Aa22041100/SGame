@@ -22,9 +22,8 @@ public class UIRootController : MonoBehaviour {
 	}
 
 	#region UI Callbacks
-	public void OnSwitchAttackModeClicked () {
-		player.SwitchAttackMode ();
-		modeLbl.text = string.Format ("Mode: {0}", player.attackStrength.ToString ());
+	public void OnStartGameClicked () {
+		GameManager.Instance.StartGame ();
 	}
 	#endregion
 

@@ -8,23 +8,31 @@ public class EnemyMovement : MonoBehaviour {
 
 	NavMeshAgent navAgent;
 	Transform player;
-	EnemyHealth health;
 
-	/// <summary>
-	/// Awake is called when the script instance is being loaded.
-	/// </summary>
-	void Awake() {
-	}
+	bool isReadyToChase = false;
 
-	// Use this for initialization
+	#region Unity Basic Events
 	void Start () {
 		navAgent = GetComponent<NavMeshAgent> ();
-		health = GetComponent<EnemyHealth> ();
 		player = GameManager.Instance.player.GetComponent<Transform> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		navAgent.SetDestination (player.position);
+
+	/// <summary>
+	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void FixedUpdate() {
+		if (isReadyToChase) {
+			navAgent.SetDestination (player.position);
+		}
+	}
+	#endregion
+
+	public void InitAI () {
+		isReadyToChase = true;
+	}
+
+	public void StopAI () {
+		isReadyToChase = false;
+		navAgent.isStopped = true;
 	}
 }

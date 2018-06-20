@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
 	public AttackMode attackStrength = AttackMode.LightAttack;
 	public float rotateSpeed = 1f;
 	public float walkSpeed = 1f;
+	public float minAtk = 1f;
+	public float maxAtk = 10f;
 
 	AnimatorStateInfo animInfo;
 
@@ -21,9 +23,9 @@ public class PlayerController : MonoBehaviour {
 	float vert;
 	float horiRotate;
 
+	#region Unity Basic Events
 	void Awake () {
 		this.playerAnimator = GetComponent<Animator> ();
-
 		animInfo = playerAnimator.GetCurrentAnimatorStateInfo (0);
 	}
 
@@ -82,10 +84,10 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Q)) {
 			SwitchAttackMode ();
 		}
-
 	}
+	#endregion
 
-	#region OnClick Event
+	#region OnClick Events
 	void TriggerBattleMode () {
 		isFighting = !isFighting;
 		if (isFighting) {

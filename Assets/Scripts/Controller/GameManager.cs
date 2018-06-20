@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager Instance;
 
+	[Header ("Managers")]
+	public EnemyManager enemyManager;
+
 	[Header ("Player")]
 	public GameObject player;
 	PlayerController playerController;
@@ -13,6 +16,9 @@ public class GameManager : MonoBehaviour {
 	[Header ("UI")]
 	public GameObject uiRoot;
 	UIRootController uiController;
+
+	[Header ("Level")]
+	public int curLevel = 1;
 
 	/// <summary>
 	/// Awake is called when the script instance is being loaded.
@@ -26,7 +32,14 @@ public class GameManager : MonoBehaviour {
 		playerController = player.GetComponent<PlayerController> ();
 		uiRoot = GameObject.FindGameObjectWithTag ("UI");
 		uiController = uiRoot.GetComponent<UIRootController> ();
+		enemyManager = GetComponentInChildren<EnemyManager> ();
 	}
+
+	#region Game Flow Methods
+	public void StartGame () {
+		enemyManager.GenerateEnemy (curLevel);
+	}
+	#endregion
 	
 	#region Related Player Methods
 	public void SwitchPlayerAttackMode (AttackMode attackMode) {
@@ -34,6 +47,12 @@ public class GameManager : MonoBehaviour {
 	}
 	public void SwitchPlayerAttackMode () {
 		playerController.SwitchAttackMode ();
+	}
+	#endregion
+
+	#region Related Enemy Methods
+	public void HideEnemy (int id) {
+		enemyManager.HideEnemy (id);
 	}
 	#endregion
 

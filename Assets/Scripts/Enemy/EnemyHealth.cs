@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	[SerializeField] float remainHp = 100f;
+
+	public void SetHealth (float maxHealth) {
+		remainHp = maxHealth;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public float GetHealth () {
+		return remainHp;
+	}
+
+	public void ReduceHealth (float damage) {
+		remainHp -= damage;
+		if (remainHp <= 0) {
+            gameObject.SendMessage("OnDie");
+		}
 	}
 }
